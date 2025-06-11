@@ -92,6 +92,10 @@ WEED = {
 		end,
 		Delete = function(self, id, skipRemove)
 			if _plants[id] ~= nil then
+				Database.Game:deleteOne({
+					collection = "weed",
+					query = { _id = id }
+				})
 				_plants[id] = nil
 				TriggerClientEvent('Weed:Client:Objects:Delete', -1, id)
 			end

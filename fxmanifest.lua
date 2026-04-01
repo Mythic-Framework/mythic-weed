@@ -1,9 +1,11 @@
 fx_version 'cerulean'
+game 'gta5'
+lua54 'yes'
+version '1.0.0'
+repository 'https://github.com/Mythic-Framework/mythic-weed'
 client_script "@mythic-base/components/cl_error.lua"
 client_script "@mythic-pwnzor/client/check.lua"
 
-game 'gta5'
-lua54 'yes'
 
 client_scripts {
     'config/cl_*.lua',

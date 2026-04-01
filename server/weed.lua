@@ -22,6 +22,7 @@ function RetrieveComponents()
 	WaitList = exports["mythic-base"]:FetchComponent("WaitList")
 	Chat = exports["mythic-base"]:FetchComponent("Chat")
 	Status = exports["mythic-base"]:FetchComponent("Status")
+	Version = exports["mythic-base"]:FetchComponent("Version")
 end
 
 AddEventHandler("Core:Shared:Ready", function()
@@ -46,6 +47,7 @@ AddEventHandler("Core:Shared:Ready", function()
 		"WaitList",
 		"Chat",
 		"Status",
+		"Version",
 	}, function(error)
 		if #error > 0 then
 			return
@@ -56,6 +58,7 @@ AddEventHandler("Core:Shared:Ready", function()
 		RegisterCallbacks()
 		RegisterTasks()
 		RegisterItems()
+		Version:Check('Mythic-Framework/Mythic-VersionCheckers', GetCurrentResourceName())
 	end)
 end)
 

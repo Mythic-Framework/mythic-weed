@@ -13,13 +13,22 @@ function SaveAllPlants()
     end
 
     if #docs > 0 then
-		Logger:Info("Weed", string.format("Saving ^2%s^7 Plants", #docs))
+        Logger:Info("Weed", string.format("Saving ^2%s^7 Plants", #docs))
+        local queries = {}
         for _, plant in ipairs(docs) do
             if plant._id then
-                exports.oxmysql:update(
-                    "UPDATE weed_plants SET data = ? WHERE id = ?", { json.encode(plant), plant._id }
-                )
+                table.insert(queries, {
+                    query = "UPDATE weed_plants SET data = ? WHERE id = ?",
+                    values = {
+                        json.encode(plant),
+                        plant._id
+                    }
+                })
             end
+        end
+
+        if #queries > 0 then
+            MySQL.transaction(queries)
         end
     end
 end

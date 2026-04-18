@@ -101,12 +101,9 @@ WEED = {
             if _plants[id] ~= nil then
                 local plant = _plants[id].plant
                 _plants[id] = nil
-
+				-- plant._id  and id the same??
                 if plant and plant._id then
-                    exports.oxmysql:execute(
-                        "DELETE FROM weed_plants WHERE id = ?",
-                        { plant._id }
-                    )
+                	MySQL.query('DELETE FROM weed_plants WHERE id = ?', {plant._id })
                 end
 
                 TriggerClientEvent("Weed:Client:Objects:Delete", -1, id)
@@ -125,7 +122,7 @@ WEED = {
                 water = 100.0,
             }
 
-			exports.oxmysql:insert(
+			MySQL.insert(
                 "INSERT INTO weed_plants (data) VALUES (?)",
                 { json.encode(weed) },
                 function(insertId)
